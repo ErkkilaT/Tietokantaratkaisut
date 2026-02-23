@@ -68,7 +68,7 @@
 - **Parameters**:
   - `id` (int) - order id
 - **Response**:JSON format
-- ### Get order information by customer id
+### Get order information by customer id
 - **Endpoint**: `/order/customer/{id}`
 - **Method**: GET
 - **Description**: Retrieve order information, including all products ordered for single customer
