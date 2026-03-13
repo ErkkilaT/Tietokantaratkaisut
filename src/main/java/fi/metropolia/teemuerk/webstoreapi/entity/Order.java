@@ -17,6 +17,7 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
+    @Column(name = "order_date", nullable = false, updatable = false, insertable = false)
     private LocalDateTime order_date;
     private LocalDateTime delivery_date;
     @ManyToOne

@@ -21,10 +21,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-  /*  private final ProductsRepository repository;
-    public ProductsController(ProductsRepository repository) {
-        this.repository = repository;
-    }*/
+
 
     @GetMapping("/product/{id}")
     public ResponseEntity<ProductDto>getProductById(@PathVariable Integer id){
@@ -33,7 +30,6 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(productDto);
-        //return repository.findById(id).map(product -> ResponseEntity.ok(product)).orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/")
