@@ -20,7 +20,6 @@ public class CustomerAddressService {
     }
 
 
-
     public List<CustomerAddress> getCustomerAddresses(Integer customerId) {
         List<CustomerAddress> addresses = customerAddressRepository.findByCustomerId(customerId);
         if(addresses == null || addresses.isEmpty()) {
@@ -38,7 +37,7 @@ public class CustomerAddressService {
         CustomerAddress existingAddress = customerAddressRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Address not found"));
 
-        // Update only non-null fields (PATCH style)
+        // Update only non-null fields
         if (updatedAddress.getStreet() != null) existingAddress.setStreet(updatedAddress.getStreet());
         if (updatedAddress.getCity() != null) existingAddress.setCity(updatedAddress.getCity());
         if (updatedAddress.getPostal_code() != null) existingAddress.setPostal_code(updatedAddress.getPostal_code());
@@ -57,12 +56,4 @@ public class CustomerAddressService {
         }
         return false;
     }
-
-
-
-
-
-
-
-
 }

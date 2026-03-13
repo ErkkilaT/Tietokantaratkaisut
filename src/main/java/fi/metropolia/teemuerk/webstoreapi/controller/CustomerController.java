@@ -3,7 +3,6 @@ package fi.metropolia.teemuerk.webstoreapi.controller;
 import fi.metropolia.teemuerk.webstoreapi.dto.CustomerDto;
 import fi.metropolia.teemuerk.webstoreapi.entity.Customer;
 import fi.metropolia.teemuerk.webstoreapi.service.CustomerService;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +26,8 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
-        Customer savedCustomer = customerService.addCustomer(customer);
+    public ResponseEntity<CustomerDto> addCustomer(@RequestBody CustomerDto customerDto) {
+        CustomerDto savedCustomer = customerService.addCustomer(customerDto);
         if(savedCustomer == null) {
             return ResponseEntity.badRequest().build();
         }
@@ -36,12 +35,21 @@ public class CustomerController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Customer> updateCustomer(@PathVariable Integer id,@RequestBody Customer customer) {
+    public ResponseEntity<CustomerDto> updateCustomer(@PathVariable Integer id,@RequestBody CustomerDto customerDto) {
 
-        Customer updatedCustomer = customerService.updateCustomer(id, customer);
+        CustomerDto updatedCustomer = customerService.updateCustomer(id, customerDto);
         if (updatedCustomer == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(updatedCustomer);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Integer id) {
+        boolean deleted = customerService.deleteCustomer(id);
+        if (!deleted) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent().build();
     }
 }

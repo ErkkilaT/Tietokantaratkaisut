@@ -25,6 +25,7 @@ public class CustomerAddressController {
     @GetMapping("/{customer_id}")
     public ResponseEntity<List<CustomerAddress>>getCustomerAddresses(@PathVariable Integer customer_id){
         List<CustomerAddress> products = customerAddressService.getCustomerAddresses(customer_id);
+
         if(products == null) {
             return ResponseEntity.notFound().build();
         }

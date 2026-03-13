@@ -28,11 +28,21 @@ public class CustomerService {
         return customerMapper.toDto(customer);
     }
 
-    public Customer addCustomer(Customer customer) {
-        return customerRepository.save(customer);
+    public CustomerDto addCustomer(CustomerDto customerDto) {
+        Customer customer = customerMapper.toEntity(customerDto);
+        Customer saved = customerRepository.save(customer);
+        return customerMapper.toDto(saved);
     }
 
-    public Customer updateCustomer(Integer id, Customer patch) {
+    public boolean deleteCustomer(Integer id) {
+        if (!customerRepository.existsById(id)) {
+            return false;
+        }
+        customerRepository.deleteById(id);
+        return true;
+    }
+
+    public CustomerDto updateCustomer(Integer id, CustomerDto patchDto) {
 
         Optional<Customer> optional = customerRepository.findById(id);
 
@@ -42,22 +52,24 @@ public class CustomerService {
 
         Customer customer = optional.get();
 
-        if (patch.getFirstName() != null) {
-            customer.setFirstName(patch.getFirstName());
+        if (patchDto.getFirstName() != null) {
+            customer.setFirstName(patchDto.getFirstName());
         }
 
-        if (patch.getLastName() != null) {
-            customer.setLastName(patch.getLastName());
+        if (patchDto.getLastName() != null) {
+            customer.setLastName(patchDto.getLastName());
         }
 
-        if (patch.getEmail() != null) {
-            customer.setEmail(patch.getEmail());
+        if (patchDto.getEmail() != null) {
+            customer.setEmail(patchDto.getEmail());
         }
 
-        if (patch.getPhone() != null) {
-            customer.setPhone(patch.getPhone());
+        if (patchDto.getPhone() != null) {
+            customer.setPhone(patchDto.getPhone());
         }
 
-        return customerRepository.save(customer);
+        Customer saved = customerRepository.save(customer);
+
+        return customerMapper.toDto(saved);
     }
 }

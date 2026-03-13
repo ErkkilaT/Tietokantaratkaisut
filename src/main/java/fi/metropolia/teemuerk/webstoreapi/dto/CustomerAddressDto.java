@@ -2,10 +2,12 @@ package fi.metropolia.teemuerk.webstoreapi.dto;
 
 public class CustomerAddressDto {
     private int id;
+    private int customerId;
     private String street;
     private String city;
     private String postalCode;
     private String country;
+
 
     public CustomerAddressDto() {
     }
@@ -50,4 +52,11 @@ public class CustomerAddressDto {
         this.street = street;
     }
 
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
 }
