@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 @Table(name="Products")
 public class Product {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Integer id;
     private String name;
     private String description;
@@ -23,7 +22,7 @@ public class Product {
     public int getCategory_id() {
         return category_id;
     }
-    public int getId() {
+    public Integer getId() {
         return id;
     }
     public String getName() {

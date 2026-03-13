@@ -1,56 +1,48 @@
 package fi.metropolia.teemuerk.webstoreapi.entity;
 
+import fi.metropolia.teemuerk.webstoreapi.key.OrderItemId;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
 @Entity
-@Table(name="orderitems")
+@Table(name = "orderitems")
 public class OrderItem {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+
+    @EmbeddedId
+    private OrderItemId id;
 
     @ManyToOne
-    @JoinColumn(name="product_id")
+    @MapsId("orderId")
+    @JoinColumn(name = "order_id")
+    private Order order;
+
+    @ManyToOne
+    @MapsId("productId")
+    @JoinColumn(name = "product_id")
     private Product product;
-    private int quantity;
-    @Column(name="unit_price")
-    private BigDecimal price;
 
-    public int getId() {
-        return id;
-    }
+    @Column(name = "quantity")
+    private Integer quantity;
 
+    @Column(name = "unit_price")
+    private BigDecimal unitPrice;
 
+    public OrderItem() {}
 
-    public Product getProduct() {
-        return product;
-    }
+    // Getters and setters
+    public OrderItemId getId() { return id; }
+    public void setId(OrderItemId id) { this.id = id; }
 
-    public int getQuantity() {
-        return quantity;
-    }
+    public Order getOrder() { return order; }
+    public void setOrder(Order order) { this.order = order; }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
+    public Product getProduct() { return product; }
+    public void setProduct(Product product) { this.product = product; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public Integer getQuantity() { return quantity; }
+    public void setQuantity(Integer quantity) { this.quantity = quantity; }
 
-
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
+    public BigDecimal getUnitPrice() { return unitPrice; }
+    public void setUnitPrice(BigDecimal unitPrice) { this.unitPrice = unitPrice; }
 }
