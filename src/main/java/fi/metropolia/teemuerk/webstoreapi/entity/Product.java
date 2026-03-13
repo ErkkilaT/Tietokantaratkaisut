@@ -1,15 +1,14 @@
 package fi.metropolia.teemuerk.webstoreapi.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name="Products")
-public class Products {
-    @Id
+public class Product {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer id;
     private String name;
     private String description;
