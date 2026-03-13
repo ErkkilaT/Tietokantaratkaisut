@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/products")
 public class ProductsController {
@@ -19,5 +21,11 @@ public class ProductsController {
     @GetMapping("/product/{id}")
     public ResponseEntity<Products>getProductById(@PathVariable Integer id){
         return repository.findById(id).map(product -> ResponseEntity.ok(product)).orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<Products>>getProducts(){
+        List<Products> products = productsService.getAllProducts();
+        return ResponseEntity.ok(products);
     }
 }
