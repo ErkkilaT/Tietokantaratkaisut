@@ -42,12 +42,5 @@ public class CustomerController {
         return ResponseEntity.ok(updatedCustomer);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable Integer id) {
-        boolean deleted = customerService.deleteCustomer(id);
-        if (!deleted) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.noContent().build();
-    }
+
 }

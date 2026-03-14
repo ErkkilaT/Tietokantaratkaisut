@@ -33,14 +33,6 @@ public class CustomerService {
         return customerMapper.toDto(saved);
     }
 
-    public boolean deleteCustomer(Integer id) {
-        if (!customerRepository.existsById(id)) {
-            return false;
-        }
-        customerRepository.deleteById(id);
-        return true;
-    }
-
     @Transactional
     public CustomerDto updateCustomer(Integer id, CustomerDto patchDto) {
         Optional<Customer> optional = customerRepository.findById(id);

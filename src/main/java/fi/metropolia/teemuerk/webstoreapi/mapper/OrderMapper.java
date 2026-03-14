@@ -26,11 +26,13 @@ public class OrderMapper {
 
         OrderDto dto = new OrderDto();
         dto.setId( order.getId());
-        dto.setCustomerId( order.getCustomer().getId());
+        dto.setCustomerId((Integer) order.getCustomer().getId());
         dto.setOrderDate(order.getOrder_date());
         dto.setDeliveryDate(order.getDelivery_date());
         dto.setStatus(order.getStatus());
-        dto.setShippingAddressId( order.getShipping_address().getId());
+        if(order.getShipping_address() != null){
+            dto.setShippingAddressId((Integer) order.getShipping_address().getId());
+        }
 
         List<OrderItemDto> itemDtos = order.getItems().stream()
                 .map(OrderItemMapper::toDto)
