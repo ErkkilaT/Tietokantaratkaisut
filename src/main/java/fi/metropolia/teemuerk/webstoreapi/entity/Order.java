@@ -23,9 +23,13 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "shipping_address_id")
     private CustomerAddress shipping_address;
+
     private String status;
     @OneToMany(mappedBy="order",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<OrderItem> items = new ArrayList<>();
+
+
+
     public Integer getId() {
         return id;
     }

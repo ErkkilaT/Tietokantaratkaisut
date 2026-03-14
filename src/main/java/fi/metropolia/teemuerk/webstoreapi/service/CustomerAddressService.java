@@ -2,8 +2,11 @@ package fi.metropolia.teemuerk.webstoreapi.service;
 
 import fi.metropolia.teemuerk.webstoreapi.entity.Customer;
 import fi.metropolia.teemuerk.webstoreapi.entity.CustomerAddress;
+import fi.metropolia.teemuerk.webstoreapi.entity.Order;
+import fi.metropolia.teemuerk.webstoreapi.exception.ActiveOrdersException;
 import fi.metropolia.teemuerk.webstoreapi.repository.CustomerAddressRepository;
-import fi.metropolia.teemuerk.webstoreapi.repository.CustomerRepository;
+
+import fi.metropolia.teemuerk.webstoreapi.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,12 +16,13 @@ import java.util.Optional;
 @Service
 public class CustomerAddressService {
     private final CustomerAddressRepository customerAddressRepository;
+    private final OrderRepository orderRepository;
 
-    public CustomerAddressService(CustomerAddressRepository customerAddressRepository) {
+    public CustomerAddressService(CustomerAddressRepository customerAddressRepository, OrderRepository orderRepository) {
         this.customerAddressRepository = customerAddressRepository;
+        this.orderRepository = orderRepository;
 
     }
-
 
     public List<CustomerAddress> getCustomerAddresses(Integer customerId) {
         List<CustomerAddress> addresses = customerAddressRepository.findByCustomerId(customerId);
@@ -27,7 +31,7 @@ public class CustomerAddressService {
         }
         return addresses;
     }
-    @Transactional
+
     public CustomerAddress addCustomerAddress(CustomerAddress address) {
         return customerAddressRepository.save(address);
     }
@@ -51,6 +55,17 @@ public class CustomerAddressService {
         Optional<CustomerAddress> addressOpt = customerAddressRepository.findById(id);
         if (addressOpt.isPresent()) {
             CustomerAddress address = addressOpt.get();
+            // Check if the address is associated with any active orders
+            List<Order> orders = orderRepository.findByAddressId(id);
+            for(Order order : orders){
+                if(order.getStatus().equals("NEW")) {
+                    throw new ActiveOrdersException("Cannot delete an address with active orders");
+                }
+                else{// If order not active, null the address reference
+                    order.setShipping_address(null);
+                    orderRepository.save(order);
+                }
+            }
             customerAddressRepository.delete(address);
             return true;
         }

@@ -20,7 +20,7 @@ public class OrderMapper {
         order.setStatus(dto.getStatus());
         order.setShipping_address(address);
 
-        // Map OrderItems
+
 
 
         return order;

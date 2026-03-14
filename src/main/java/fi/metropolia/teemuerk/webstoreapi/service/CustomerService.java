@@ -5,6 +5,7 @@ import fi.metropolia.teemuerk.webstoreapi.entity.Customer;
 import fi.metropolia.teemuerk.webstoreapi.mapper.CustomerMapper;
 import fi.metropolia.teemuerk.webstoreapi.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -42,6 +43,7 @@ public class CustomerService {
         return true;
     }
 
+    @Transactional
     public CustomerDto updateCustomer(Integer id, CustomerDto patchDto) {
 
         Optional<Customer> optional = customerRepository.findById(id);
