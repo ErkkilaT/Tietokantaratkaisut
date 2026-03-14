@@ -2,7 +2,6 @@ package fi.metropolia.teemuerk.webstoreapi.entity;
 
 import fi.metropolia.teemuerk.webstoreapi.key.OrderItemId;
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 
 @Entity
@@ -30,7 +29,6 @@ public class OrderItem {
 
     public OrderItem() {}
 
-    // Getters and setters
     public OrderItemId getId() { return id; }
     public void setId(OrderItemId id) { this.id = id; }
 

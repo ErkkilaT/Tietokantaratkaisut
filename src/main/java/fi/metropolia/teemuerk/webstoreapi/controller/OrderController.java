@@ -4,7 +4,6 @@ import fi.metropolia.teemuerk.webstoreapi.dto.OrderDto;
 import fi.metropolia.teemuerk.webstoreapi.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -14,6 +13,7 @@ public class OrderController {
     public OrderController(final OrderService orderService) {
         this.orderService = orderService;
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<OrderDto> getOrderById(@PathVariable Integer id) {
         OrderDto orderDto = orderService.getOrderById(id);

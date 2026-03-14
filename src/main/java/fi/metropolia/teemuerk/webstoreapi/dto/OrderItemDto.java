@@ -1,7 +1,6 @@
 package fi.metropolia.teemuerk.webstoreapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.math.BigDecimal;
 
 public class OrderItemDto {

@@ -1,8 +1,6 @@
 package fi.metropolia.teemuerk.webstoreapi.repository;
 
-import fi.metropolia.teemuerk.webstoreapi.entity.Customer;
 import fi.metropolia.teemuerk.webstoreapi.entity.CustomerAddress;
-import fi.metropolia.teemuerk.webstoreapi.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

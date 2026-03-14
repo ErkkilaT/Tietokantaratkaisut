@@ -1,7 +1,6 @@
 package fi.metropolia.teemuerk.webstoreapi.controller;
 
 import fi.metropolia.teemuerk.webstoreapi.dto.CustomerDto;
-import fi.metropolia.teemuerk.webstoreapi.entity.Customer;
 import fi.metropolia.teemuerk.webstoreapi.service.CustomerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +12,6 @@ public class CustomerController {
     public CustomerController(final CustomerService customerService) {
         this.customerService = customerService;
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<CustomerDto> getCustomerById(@PathVariable Integer id){

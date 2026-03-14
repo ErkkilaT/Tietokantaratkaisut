@@ -4,7 +4,6 @@ import fi.metropolia.teemuerk.webstoreapi.dto.CustomerAddressDto;
 import fi.metropolia.teemuerk.webstoreapi.dto.CustomerDto;
 import fi.metropolia.teemuerk.webstoreapi.entity.Customer;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

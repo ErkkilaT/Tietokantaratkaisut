@@ -1,24 +1,16 @@
 package fi.metropolia.teemuerk.webstoreapi.controller;
 
-
-import fi.metropolia.teemuerk.webstoreapi.dto.CustomerDto;
-import fi.metropolia.teemuerk.webstoreapi.dto.ProductDto;
 import fi.metropolia.teemuerk.webstoreapi.entity.CustomerAddress;
 import fi.metropolia.teemuerk.webstoreapi.service.CustomerAddressService;
-import fi.metropolia.teemuerk.webstoreapi.service.CustomerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("/address")
 public class CustomerAddressController {
-
     private final CustomerAddressService customerAddressService;
-
     public CustomerAddressController( CustomerAddressService customerAddressService) {
-
         this.customerAddressService = customerAddressService;
     }
 

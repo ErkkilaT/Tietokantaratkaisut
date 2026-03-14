@@ -1,15 +1,12 @@
 package fi.metropolia.teemuerk.webstoreapi.service;
 
-import fi.metropolia.teemuerk.webstoreapi.entity.Customer;
 import fi.metropolia.teemuerk.webstoreapi.entity.CustomerAddress;
 import fi.metropolia.teemuerk.webstoreapi.entity.Order;
 import fi.metropolia.teemuerk.webstoreapi.exception.ActiveOrdersException;
 import fi.metropolia.teemuerk.webstoreapi.repository.CustomerAddressRepository;
-
 import fi.metropolia.teemuerk.webstoreapi.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +18,6 @@ public class CustomerAddressService {
     public CustomerAddressService(CustomerAddressRepository customerAddressRepository, OrderRepository orderRepository) {
         this.customerAddressRepository = customerAddressRepository;
         this.orderRepository = orderRepository;
-
     }
 
     public List<CustomerAddress> getCustomerAddresses(Integer customerId) {

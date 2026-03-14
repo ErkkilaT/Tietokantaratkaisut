@@ -2,13 +2,11 @@ package fi.metropolia.teemuerk.webstoreapi.key;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
 public class OrderItemId implements Serializable {
-
     @Column(name = "order_id")
     private Integer orderId;
 
@@ -22,10 +20,8 @@ public class OrderItemId implements Serializable {
         this.productId = productId;
     }
 
-    // Getters and setters
     public Integer getOrderId() { return orderId; }
     public void setOrderId(Integer orderId) { this.orderId = orderId; }
-
     public Integer getProductId() { return productId; }
     public void setProductId(Integer productId) { this.productId = productId; }
 

@@ -6,11 +6,9 @@ import fi.metropolia.teemuerk.webstoreapi.entity.OrderItem;
 import fi.metropolia.teemuerk.webstoreapi.entity.Product;
 import fi.metropolia.teemuerk.webstoreapi.key.OrderItemId;
 
-import java.math.BigDecimal;
-
 public class OrderItemMapper {
 
-    // Entity → DTO
+
     public static OrderItemDto toDto(OrderItem entity) {
         if (entity == null) return null;
 
@@ -22,7 +20,6 @@ public class OrderItemMapper {
         return dto;
     }
 
-    // DTO → Entity (with Product entity)
     public static OrderItem toEntity(OrderItemDto dto, Product product, Order order) {
         if (dto == null || product == null) return null;
 

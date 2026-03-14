@@ -1,7 +1,6 @@
 package fi.metropolia.teemuerk.webstoreapi.entity;
 
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 
 @Entity
@@ -37,31 +36,24 @@ public class Product {
     public int getSupplier_id() {
         return supplier_id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
-
     public void setCategory_id(int category_id) {
         this.category_id = category_id;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-
     public void setStock_quantity(int stock_quantity) {
         this.stock_quantity = stock_quantity;
     }
-
     public void setSupplier_id(int supplier_id) {
         this.supplier_id = supplier_id;
     }

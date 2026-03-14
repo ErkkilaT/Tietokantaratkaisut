@@ -19,8 +19,6 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-
-
     public CustomerDto getCustomerDto(Integer id) {
         Customer customer = customerRepository.findById(id).orElse(null);
         if (customer == null) {
@@ -45,31 +43,23 @@ public class CustomerService {
 
     @Transactional
     public CustomerDto updateCustomer(Integer id, CustomerDto patchDto) {
-
         Optional<Customer> optional = customerRepository.findById(id);
-
         if (optional.isEmpty()) {
             return null;
         }
-
         Customer customer = optional.get();
-
         if (patchDto.getFirstName() != null) {
             customer.setFirstName(patchDto.getFirstName());
         }
-
         if (patchDto.getLastName() != null) {
             customer.setLastName(patchDto.getLastName());
         }
-
         if (patchDto.getEmail() != null) {
             customer.setEmail(patchDto.getEmail());
         }
-
         if (patchDto.getPhone() != null) {
             customer.setPhone(patchDto.getPhone());
         }
-
         Customer saved = customerRepository.save(customer);
 
         return customerMapper.toDto(saved);
