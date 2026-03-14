@@ -262,3 +262,12 @@ ON DELETE SET NULL;
 - **Method**: GET
 - **Description**: Retrieve list of product categories
 - **Response**:JSON format
+
+
+# Final notes
+Here i will list a few things I did that i thought were of note that don't show up above:
+- Using mostly DTOs. This proved a bit of a headache especially with creating orders and orderitems simultaneously.
+- Exceptionhandling. The coverage isn't very good since it was mostly an afterthought but implemented some error handling (E.g. Ordering an item that doesn't have enough stock gives a HTTP-response with a correct code and information about which product is out of stock)
+- Proper stock management on making orders with reasonable concurrency control locking the product rows when needed (deadlocks are not handled yet)
+
+  
