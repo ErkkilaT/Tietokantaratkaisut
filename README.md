@@ -1,5 +1,5 @@
 # Online store database API
-This a school project API-solution for a webstore database by Teemu Erkkilä. This API includes endpoints required for the consumer-side usage of a webstore so it doesn't include endpoints/indexing etc. that is needed for managing the store. This API also does not allow deletion of user accounts or deleting/updating orders, but does allow for deleting user addresses. The thought was that removing accounts or canceling/deleting orders would be done through customer service.
+This a school project API-solution for a webstore database by Teemu Erkkilä. This API includes endpoints required for the consumer-side usage of a webstore so it doesn't include endpoints/indexing etc. that are needed for managing the store. This API also does not allow deletion of user accounts or deleting/updating orders, but does allow for deleting user addresses. The reasoning was that removing accounts or canceling/deleting orders would be done through customer service.
 
 # Database Preparation
 The database was edited in the following way for security, referential integrity and performance reasons.
@@ -65,7 +65,7 @@ AFTER INSERT ON orders
 FOR EACH ROW
 INSERT INTO orderlog (order_id) VALUES (NEW.id);
 ```
-Also an event that removes cancelled orders that were created over two years ago, it runs monthly
+Also added an event that removes cancelled orders that were created over two years ago, it runs monthly
 ```
 SET GLOBAL event_scheduler = ON;
 -- delete old cancelled orders and their items
@@ -92,7 +92,7 @@ DELIMITER ;
 ```
 
 #### Other
-The orders-table was altered to allow for deleting customeraddresses. This is acceptable because in the API there is a block to deleting addresses that are used in any active orders (For the purpose of this exercise it was determined that status 'SHIPPED' meant shipped and delivered since there was no 'Delivered' -type status)
+The orders-table was altered to allow for deleting `customeraddresses`. This is acceptable because in the API deleting addresses that are used in any active orders is blocked (For the purpose of this exercise it was determined that status 'SHIPPED' means shipped and delivered since there is no 'Delivered' -type status)
 ```
 -- Allow deletion of customeraddresses. Blocking deletion of addresses that have active orders is blocked in API
 ALTER TABLE orders
@@ -267,7 +267,7 @@ ON DELETE SET NULL;
 # Final notes
 Here i will list a few things I did that i thought were of note that don't show up above:
 - Using mostly DTOs. This proved a bit of a headache especially with creating orders and orderitems simultaneously.
-- Exceptionhandling. The coverage isn't very good since it was mostly an afterthought but implemented some error handling (E.g. Ordering an item that doesn't have enough stock gives a HTTP-response with a correct code and information about which product is out of stock)
-- Proper stock management on making orders with reasonable concurrency control locking the product rows when needed (deadlocks are not handled yet)
+- Exception handling. The coverage isn't very good since it was mostly an afterthought but implemented some error handling (E.g. Ordering an item that doesn't have enough stock gives a HTTP-response with a correct code and information about which product is out of stock).
+- Proper stock management on making orders with reasonable concurrency control locking the product rows when needed (deadlocks are not handled yet).
 
   
